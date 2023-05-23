@@ -42,6 +42,16 @@ async function run() {
         const result =await toyCollection.find(query).toArray();
         res.send(result); 
     })
+    app.get('/category',async(req,res)=>{
+      console.log(req.query.category);
+      let query ={}
+      if(req.query?.category){
+          query ={email:req.query.category}
+      }
+      const result =await toyCollection.find(query).toArray();
+      res.send(result); 
+  })
+
       } catch (error) {
         console.error(error);
         res.status(500).send("An error occurred while updating the toy.");
