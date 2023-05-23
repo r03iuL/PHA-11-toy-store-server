@@ -16,7 +16,16 @@ app.get("/",(req, res)=>{
     res.send("Server is running")
 })
 
+const uri = "mongodb+srv://cse2112020031:VWhUPD2zvtEyNvz6@cluster0.by40fgv.mongodb.net/?retryWrites=true&w=majority";
 
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
 
 
 
