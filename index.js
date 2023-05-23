@@ -31,7 +31,17 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    
+    const toyCollection = client.db("toystore").collection("toys")
+
+    app.get('/alltoys',async(req,res)=>{
+        console.log(req.query.email);
+        let query ={}
+        if(req.query?.email){
+            query ={email:req.query.email}
+        }
+        const result =await toyCollection.find(query).toArray();
+        res.send(result); 
+    })
       } catch (error) {
         console.error(error);
         res.status(500).send("An error occurred while updating the toy.");
