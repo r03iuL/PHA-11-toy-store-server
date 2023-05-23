@@ -72,8 +72,29 @@ app.put("/alltoys/:id", async (req, res) => {
 
     const filter = { _id: new ObjectId(id) };
     const options = { upsert: true };
-    
 
+    const updateDoc = {
+      $set: {
+        customerName: reqBody.customerName,
+        email: reqBody.email,
+        price: reqBody.price,
+        photoURL: reqBody.photoURL,
+        sellerName: reqBody.sellerName,
+        category: reqBody.category,
+        rating: reqBody.rating,
+        quantity: reqBody.quantity,
+      },
+    };
+
+    const result = await toyCollection.updateOne(filter, updateDoc, options);
+
+    res.send(result);
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while updating the toy.");
+      }
+    });
       } catch (error) {
         console.error(error);
         res.status(500).send("An error occurred while updating the toy.");
