@@ -65,6 +65,14 @@ app.delete("/alltoys/:id",async(req,res)=>{
   const result = await toyCollection.deleteOne(query);
   res.send(result)
 })
+app.put("/alltoys/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const reqBody = req.body;
+
+    const filter = { _id: new ObjectId(id) };
+    const options = { upsert: true };
+    
 
       } catch (error) {
         console.error(error);
