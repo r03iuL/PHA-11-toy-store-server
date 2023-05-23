@@ -95,6 +95,15 @@ app.put("/alltoys/:id", async (req, res) => {
     res.status(500).send("An error occurred while updating the toy.");
       }
     });
+app.post("/alltoys",async(req,res)=>{
+  const toy =req.body;
+  console.log(toy);
+  const result = await toyCollection.insertOne(toy);
+  res.send(result);
+})
+// Send a ping to confirm a successful connection
+await client.db("admin").command({ ping: 1 });
+console.log("Pinged your deployment. You successfully connected to MongoDB!");
       } catch (error) {
         console.error(error);
         res.status(500).send("An error occurred while updating the toy.");
